@@ -13,11 +13,6 @@ function App() {
           <Route path="/" element={<NewHome />} />
           <Route path="/case-study/:id" element={<CaseStudyDetail />} />
         </Routes>
-        <footer className="app-footer">
-          <div className="footer-content">
-            <p>&copy; 2024 Hari Prasanth S. All rights reserved. | Crafting digital experiences with purpose.</p>
-          </div>
-        </footer>
       </div>
     </Router>
   )

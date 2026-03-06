@@ -139,16 +139,35 @@ export default function NewHome() {
             <a href="https://dribbble.com/hari2kprasanth" className="social-icon"><i className="bi bi-dribbble"></i> Dribbble</a>
           </motion.div>
         </div>
-
         <motion.div
-          className="hero-visual-new"
-          variants={floatingVariants}
-          animate="animate"
-        >
-          <div className="profile-container">
-            <div className="profile-image-placeholder"><img src="/images/profile.jpg" alt="Profile" /></div>
-          </div>
-        </motion.div>
+  className="hero-visual-new"
+  variants={floatingVariants}
+  animate="animate"
+>
+  <div className="profile-container">
+
+    <div className="orbit-icons">
+
+<img src="https://logo.svgcdn.com/logos/figma.png" className="orbit-icon figma" alt="Figma"/>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-original.svg" className="orbit-icon xd" alt="Adobe XD"/>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" className="orbit-icon ps" alt="Photoshop"/>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" className="orbit-icon ai" alt="Illustrator"/>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" className="orbit-icon html" alt="HTML"/>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" className="orbit-icon css" alt="CSS"/>
+
+</div>
+
+    <div className="profile-image-placeholder">
+      <img src="/images/profile.jpg" alt="Profile" />
+    </div>
+
+  </div>
+</motion.div>
       </motion.section>
 
       {/* About Section */}
