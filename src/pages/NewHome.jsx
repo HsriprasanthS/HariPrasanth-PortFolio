@@ -757,7 +757,7 @@ export default function NewHome() {
           </div>
 
           <div className="footer-bottom">
-            <p>&copy; 2024 Hari Prasanth S. All rights reserved.</p>
+            <p>&copy;Hari Prasanth S. All rights reserved.</p>
           </div>
         </div>
       </motion.footer>
