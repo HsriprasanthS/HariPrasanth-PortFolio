@@ -56,7 +56,7 @@ export default function Navigation() {
 
         <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
           <motion.li variants={linkVariants} whileHover="hover">
-            <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
+            <Link to="/" className="nav-link" onClick={() => setIsSection('home')}>Home</Link>
           </motion.li>
           <motion.li variants={linkVariants} whileHover="hover">
             <button className="nav-link" onClick={() => scrollToSection('about')}>About</button>
@@ -65,21 +65,12 @@ export default function Navigation() {
             <button className="nav-link" onClick={() => scrollToSection('skills')}>Skills</button>
           </motion.li>
           <motion.li variants={linkVariants} whileHover="hover">
-            <button className="nav-link" onClick={() => scrollToSection('projects')}>Projects</button>
+            <button className="nav-link" onClick={() => scrollToSection('figma-designs')}>Designs</button>
           </motion.li>
           <motion.li variants={linkVariants} whileHover="hover">
             <button className="nav-link" onClick={() => scrollToSection('contact')}>Contact</button>
           </motion.li>
         </ul>
-
-        <motion.a 
-          href="/resume.pdf"
-          className="nav-cta"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Resume
-        </motion.a>
       </div>
     </motion.nav>
   )

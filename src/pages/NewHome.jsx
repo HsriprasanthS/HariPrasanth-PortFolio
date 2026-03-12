@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './NewHome.css'
 
@@ -11,6 +10,16 @@ export default function NewHome() {
   const [currentText, setCurrentText] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [selectedDesign, setSelectedDesign] = useState(null)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 300)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const titles = ['UI/UX Designer', 'Frontend Developer', 'Creative Thinker']
   const typingSpeed = 100
@@ -46,8 +55,15 @@ export default function NewHome() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission
-    console.log({ name, email, message })
+    // open default mail client with pre-filled email
+    const recipient = 'hari2kprasanth@gmail.com'
+    const subject = 'Portfolio Contact Form'
+    const body = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      body
+    )}`
+    window.location.href = mailto
+
     setFormSubmitted(true)
     setTimeout(() => {
       setName('')
@@ -140,34 +156,34 @@ export default function NewHome() {
           </motion.div>
         </div>
         <motion.div
-  className="hero-visual-new"
-  variants={floatingVariants}
-  animate="animate"
->
-  <div className="profile-container">
+          className="hero-visual-new"
+          variants={floatingVariants}
+          animate="animate"
+        >
+          <div className="profile-container">
 
-    <div className="orbit-icons">
+            <div className="orbit-icons">
 
-<img src="https://logo.svgcdn.com/logos/figma.png" className="orbit-icon figma" alt="Figma"/>
+              <img src="https://logo.svgcdn.com/logos/figma.png" className="orbit-icon figma" alt="Figma" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-original.svg" className="orbit-icon xd" alt="Adobe XD"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-original.svg" className="orbit-icon xd" alt="Adobe XD" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" className="orbit-icon ps" alt="Photoshop"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" className="orbit-icon ps" alt="Photoshop" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" className="orbit-icon ai" alt="Illustrator"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" className="orbit-icon ai" alt="Illustrator" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" className="orbit-icon html" alt="HTML"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" className="orbit-icon html" alt="HTML" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" className="orbit-icon css" alt="CSS"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" className="orbit-icon css" alt="CSS" />
 
-</div>
+            </div>
 
-    <div className="profile-image-placeholder">
-      <img src="/images/profile.jpg" alt="Profile" />
-    </div>
+            <div className="profile-image-placeholder">
+              <img src="/images/profile.jpg" alt="Profile" />
+            </div>
 
-  </div>
-</motion.div>
+          </div>
+        </motion.div>
       </motion.section>
 
       {/* About Section */}
@@ -219,10 +235,6 @@ export default function NewHome() {
             <div className="detail-item">
               <span className="detail-label">Email</span>
               <span className="detail-value">hari2kprasanth@gmail.com</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Location</span>
-              <span className="detail-value">Erode, Tamil Nadu</span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Status</span>
@@ -370,10 +382,11 @@ export default function NewHome() {
           >
             <h3>Tools & Software</h3>
             {[
+              { name: 'FIGMA', level: 90 },
               { name: 'Git & GitHub', level: 90 },
               { name: 'VS Code', level: 95 },
               { name: 'Photoshop', level: 30 },
-              { name: 'Adobe XD', level: 50 },
+
               { name: 'Jira', level: 50 }
             ].map((skill, idx) => (
               <div key={idx} className="skill-item">
@@ -393,125 +406,106 @@ export default function NewHome() {
           </motion.div>
         </div>
       </motion.section>
-
-      {/* Featured Project */}
+      {/* Figma Designs Section */}
       <motion.section
-        className="featured-project"
+        id="figma-designs"
+        className="figma-designs-section"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
         <div className="section-header-new">
-          <h2>Featured Project</h2>
+          <h2>Figma Designs</h2>
         </div>
 
-        <motion.div
-          className="featured-card"
-          whileHover={{ y: -10 }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="featured-image"><i className="bi bi-car-front"></i></div>
-          <div className="featured-content">
-            <h3>ResQRide – Roadside Assistance Platform</h3>
-            <p className="featured-subtitle">Mobile App Design & Development</p>
-
-            <div className="featured-details">
-              <div className="detail">
-                <strong>Problem Statement:</strong>
-                <p>Drivers in distress lack immediate access to reliable roadside assistance services, leading to long wait times and safety concerns.</p>
-              </div>
-              <div className="detail">
-                <strong>Solution:</strong>
-                <p>ResQRide is a real-time roadside assistance platform that connects drivers with nearby service providers instantly.</p>
-              </div>
-            </div>
-
-            <div className="featured-tags">
-              <span className="tag">User Research</span>
-              <span className="tag">UI Design</span>
-              <span className="tag">Prototyping</span>
-              <span className="tag">Development</span>
-            </div>
-
-            <Link to="/case-study/resqride" className="btn-primary">
-              View Full Case Study →
-            </Link>
-          </div>
-        </motion.div>
-      </motion.section>
-
-      {/* Cases Studies Section */}
-      <motion.section
-        id="projects"
-        className="case-studies-section"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <div className="section-header-new">
-          <h2>Case Studies & Projects</h2>
-        </div>
-
-        <div className="projects-grid">
+        <div className="designs-grid">
           {[
             {
-              id: 'resqride',
-              title: 'ResQRide – Roadside Assistance',
-              desc: 'Real-time roadside assistance platform connecting drivers with service providers',
-              tags: ['UX Research', 'UI Design', 'App'],
-              emoji: 'bi-car-front',
-              color: '#FF6B6B'
+              id: 1,
+              title: 'DESIGN',
+              desc: 'Interactive Figma design project showcasing modern UI patterns.',
+              embed: '<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://embed.figma.com/design/RjZdRu1bc1LcviiRX03PT4/DESIGN?node-id=20-6829&embed-host=share" loading="lazy" allowfullscreen></iframe>',
+              thumbnail: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop',
+              tags: ['Figma', 'UI Design', 'Prototype']
             },
             {
-              id: 'revive',
-              title: 'Revive Holidays App',
-              desc: 'Travel booking and itinerary planning application with AI recommendations',
-              tags: ['UX/UI', 'App Design', 'Web'],
-              emoji: 'bi-airplane',
-              color: '#4ECDC4'
+              id: 2,
+              title: 'LMS Dashboard',
+              desc: 'Learning Management System dashboard with comprehensive interface design.',
+              embed: '<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://embed.figma.com/design/bP1hRMC5R5mkOtz14UYysn/LMS---Dashboard?node-id=0-1&embed-host=share" loading="lazy" allowfullscreen></iframe>',
+              thumbnail: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop',
+              tags: ['Figma', 'Dashboard', 'Web']
             },
             {
-              id: 'travel',
-              title: 'Travel App Figma Prototype',
-              desc: 'Interactive Figma prototype showcasing modern travel app design patterns',
-              tags: ['UI Design', 'Figma', 'Prototype'],
-              emoji: 'bi-geo-alt',
-              color: '#FFE66D'
+              id: 3,
+              title: 'G-PAY',
+              desc: 'Digital payment app interface design with intuitive user experience.',
+              embed: '<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://embed.figma.com/design/xmBKKZ4HXoy25BiFdP1RIO/G-PAY?node-id=0-1&embed-host=share" loading="lazy" allowfullscreen></iframe>',
+              thumbnail: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=500&h=300&fit=crop',
+              tags: ['Figma', 'App Design', 'Payment']
             }
-          ].map((project, idx) => (
+          ].map((design, idx) => (
             <motion.div
               key={idx}
-              className="project-card"
+              className="design-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -10 }}
               viewport={{ once: true }}
             >
-              <div className="project-image" style={{ backgroundColor: project.color }}>
-                <i className={`bi ${project.emoji}`}></i>
+              <div className="design-thumbnail-wrapper" onClick={() => setSelectedDesign(design)}>
+                <img src={design.thumbnail} alt={design.title} className="design-thumbnail" />
+                <div className="design-overlay">
+                  <button className="play-btn">
+                    <i className="bi bi-play-circle-fill"></i>
+                  </button>
+                </div>
               </div>
-              <h3>{project.title}</h3>
-              <p>{project.desc}</p>
-              <div className="project-tags">
-                {project.tags.map((tag, i) => (
-                  <span key={i} className="project-tag">{tag}</span>
+              <h3>{design.title}</h3>
+              <p>{design.desc}</p>
+              <div className="design-tags">
+                {design.tags.map((tag, i) => (
+                  <span key={i} className="design-tag">{tag}</span>
                 ))}
               </div>
-              <Link to={`/case-study/${project.id}`} className="btn-outline">
-                View Case Study
-              </Link>
             </motion.div>
           ))}
         </div>
+        
+        {/* Figma Embed Modal */}
+        {selectedDesign && (
+          <motion.div
+            className="figma-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedDesign(null)}
+          >
+            <motion.div
+              className="figma-modal-content"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <h3 className="modal-title">{selectedDesign.title}</h3>
+                <button className="modal-close" onClick={() => setSelectedDesign(null)}>
+                  <i className="bi bi-x-lg"></i>
+                </button>
+              </div>
+              <div className="modal-embed-container">
+                <div className="modal-embed" dangerouslySetInnerHTML={{ __html: selectedDesign.embed }} />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
       </motion.section>
 
       {/* Services Section */}
-      <motion.section
+      <motion.section   
         className="services-new"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -547,48 +541,69 @@ export default function NewHome() {
           ))}
         </div>
       </motion.section>
-{/* courses Section */}
-<div className="section-header-new">
-          <h2>Courses</h2>
-        </div>
+      {/* courses Section */}
+      <div className="section-header-new">
+        <h2>Achievements & Posts</h2>
+      </div>
       <div className="courses-scroll">
-         
+
         {[
           {
-            title: "Google UX Design Professional Certificate",
-            issuer: "Coursera",
-            year: "2024",
-            description: "User-centered design, wireframing, prototyping and usability testing.",
-            link: "#"
-          },
-          {
-            title: "Responsive Web Design",
-            issuer: "freeCodeCamp",
+            title: "Fullstack Development Internship",
+            issuer: "LinkedIn",
             year: "2023",
-            description: "Built responsive websites using modern CSS layout techniques.",
-            link: "#"
+            description: "Web development internship experience shared on LinkedIn.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_fullstackdevelopment-webdevelopment-internship-activity-7388773119533973504-kGI0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
           },
           {
-            title: "Java Programming Fundamentals",
-            issuer: "Oracle Academy",
+            title: "AI Mental Health Workshop",
+            issuer: "LinkedIn",
             year: "2023",
-            description: "Object-oriented programming and core Java development.",
-            link: "#"
+            description: "Participated in an AI & mental health workshop.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_ai-mentalhealth-workshop-activity-7388774024576897024-xdLq?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
           },
           {
-            title: "UI/UX Design Masterclass",
-            issuer: "Udemy",
-            year: "2024",
-            description: "UX research, personas, user flows and interface design.",
-            link: "#"
+            title: "MS Office Learning Journey",
+            issuer: "LinkedIn",
+            year: "2023",
+            description: "Started MS Office skills journey under Digital Skills program.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_msoffice-learningjourney-digitalskills-activity-7388930832188682241-kvyJ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
           },
           {
-            title: "UI/UX Design Masterclass",
-            issuer: "Udemy",
-            year: "2024",
-            description: "UX research, personas, user flows and interface design.",
-            link: "#"
+            title: "Robotics STEM Innovation",
+            issuer: "LinkedIn",
+            year: "2023",
+            description: "Shared insights on robotics and STEM innovation.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_robotics-stem-innovation-activity-7388931045578092544-X9qa?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
           },
+          {
+            title: "Graphics Design & Animation",
+            issuer: "LinkedIn",
+            year: "2023",
+            description: "Explored creative tech with graphics and animation.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_graphicsdesign-animation-creativetech-activity-7388931329008201728-UZo9?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
+          },
+          {
+            title: "Cloud Tech Internship",
+            issuer: "LinkedIn",
+            year: "2023",
+            description: "Completed cloud technology internship.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_cloud-tech-internshipdone-activity-7388936648249753601-LPYg?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
+          },
+          {
+            title: "Web Design Frontend - Dhruva2024",
+            issuer: "LinkedIn",
+            year: "2024",
+            description: "Showcased frontend web design at Dhruva 2024.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_webdesign-frontend-dhruva2024-activity-7388945435509481472-4Puy?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
+          },
+          {
+            title: "Industrial Robotics - KUKA & Siemens",
+            issuer: "LinkedIn",
+            year: "2024",
+            description: "Post about industrial robotics collaboration with KUKA & Siemens.",
+            link: "https://www.linkedin.com/posts/hari-prasanths_industrialrobotics-kuka-siemens-activity-7388947670024953856-C3K2?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAERSUH0BTrqgwyCtB31jijd6q8gIavTN43A"
+          }
         ].map((course, idx) => (
 
           <motion.div
@@ -596,11 +611,12 @@ export default function NewHome() {
             className="cert-card"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ delay: idx * 0.1, duration: 0.8 }}
           >
 
             <div className="cert-icon">
-              <i className="bi bi-award"></i>
+              <i className="bi bi-linkedin"></i>
             </div>
 
             <h4>{course.title}</h4>
@@ -614,9 +630,9 @@ export default function NewHome() {
             <a
               href={course.link}
               target="_blank"
-              className="cert-btn"
+              className="cert-btn linkedin-btn"
             >
-              View Certificate
+              View Post
             </a>
 
           </motion.div>
@@ -725,7 +741,7 @@ export default function NewHome() {
             <ul>
               <li><button onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}>About</button></li>
               <li><button onClick={() => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })}>Skills</button></li>
-              <li><button onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>Projects</button></li>
+              <li><button onClick={() => document.getElementById('figma-designs').scrollIntoView({ behavior: 'smooth' })}>Designs</button></li>
               <li><button onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}>Contact</button></li>
             </ul>
           </div>
@@ -742,15 +758,23 @@ export default function NewHome() {
 
           <div className="footer-bottom">
             <p>&copy; 2024 Hari Prasanth S. All rights reserved.</p>
-            <button
-              className="back-to-top"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              ↑ Back to Top
-            </button>
           </div>
         </div>
       </motion.footer>
+
+      {/* Fixed Back to Top Button */}
+      <motion.button
+        className="back-to-top-fixed"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isScrolled ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.3 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        style={{ pointerEvents: isScrolled ? 'auto' : 'none' }}
+      >
+        <i className="bi bi-arrow-up"></i>
+      </motion.button>
     </div>
   )
 }
